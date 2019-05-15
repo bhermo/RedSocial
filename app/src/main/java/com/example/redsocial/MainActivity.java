@@ -19,9 +19,7 @@ import com.example.redsocial.Fragments.SearchFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    //New Code
-    ImageView imageView;
-    //
+
     BottomNavigationView bottomNavigationView;
     Fragment selectedFragment = null;
 
@@ -31,18 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //New Code
 
-        imageView = (ImageView)findViewById(R.id.mapbutton);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mainIntent = new Intent(MainActivity.this,MapsActivity.class);
-                startActivity(mainIntent);
-            }
-        });
-        //
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedLintener);
 
