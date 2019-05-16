@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new ProfileFragment();
                             break;
 
+
                     }
 
                     if(selectedFragment !=null){
