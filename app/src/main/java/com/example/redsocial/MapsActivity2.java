@@ -1,18 +1,32 @@
 package com.example.redsocial;
 
+import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private DatabaseReference mDatabase;
+    private ArrayList<Marker> tmpRealTimeMarker = new ArrayList<>();
+    private ArrayList<Marker> realTimeMarker = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +36,32 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        countDownTimer();
+
     }
+
+
+    private void countDownTimer(){
+
+        new CountDownTimer(10000,1000){
+
+            public void onTick(long millisUntilFinished) {
+                Log.e("seconds remaining",""+millisUntilFinished / 1000);
+
+            }
+
+            @Override
+            public void onFinish() {
+                Toast.makeText(MapsActivity2.this,"Updated Points",Toast.LENGTH_SHORT).show();
+                onMapReady(mMap);
+            }
+        }.start();
+
+
+    }
+
 
 
     /**
@@ -38,9 +77,36 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mDatabase.child("usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (Marker marker:realTimeMarker){
+                    marker.remove();
+                }
+
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+
+                    MapsPojo mp = snapshot.getValue(MapsPojo.class);
+                    Double latitud = mp.getLatitud();
+                    Double longitud = mp.getLongitud();
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(new LatLng(latitud,longitud));
+                    tmpRealTimeMarker.add(mMap.addMarker(markerOptions));
+
+                }
+
+                realTimeMarker.clear();
+                realTimeMarker.addAll(tmpRealTimeMarker);
+                countDownTimer();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }

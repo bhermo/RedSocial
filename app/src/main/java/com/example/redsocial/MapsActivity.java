@@ -9,14 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.varunest.sparkbutton.SparkButton;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +26,7 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
     private int MY_PERMISSIONS_REQUEST_READ_CONTACTS ;
     private FusedLocationProviderClient mFusedLocationClient;
     DatabaseReference mDatabase;
-    private Button mbuttonmap;
+    private SparkButton msparkbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,9 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         uploadLatLongFirebase();
-        mbuttonmap = findViewById(R.id.buttonmap);
-        mbuttonmap.setOnClickListener(this);
+
+        msparkbutton = findViewById(R.id.spark_button);
+        msparkbutton.setOnClickListener(this);
     }
 
     private void uploadLatLongFirebase() {
@@ -73,9 +74,11 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
 
-            case R.id.buttonmap : Intent intent = new Intent(MapsActivity.this,MapsActivity2.class);
-                                  startActivity(intent);
-                                  break;
+            case R.id.spark_button : Intent intent = new Intent(MapsActivity.this,MapsActivity2.class);
+                                     startActivity(intent);
+                                     break;
         }
     }
+
+
 }

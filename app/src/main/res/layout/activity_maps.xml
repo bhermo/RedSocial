@@ -4,18 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBlack"
     android:gravity="center"
     tools:context=".MapsActivity">
 
+    <com.varunest.sparkbutton.SparkButton
+        android:id="@+id/spark_button"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:sparkbutton_activeImage="@drawable/text"
+        app:sparkbutton_inActiveImage="@drawable/fondonegro2"
+        app:sparkbutton_iconSize="130dp"
+        app:sparkbutton_primaryColor="@color/colorPrimary_1"
+        app:sparkbutton_secondaryColor="@color/colorSecond_2" />
 
 
-    <Button
-        android:id="@+id/buttonmap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Ir al Mapa"
-        android:textStyle="bold" />
 
 
 </LinearLayout>
