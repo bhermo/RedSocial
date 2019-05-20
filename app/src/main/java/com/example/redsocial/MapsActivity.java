@@ -64,6 +64,8 @@ public class MapsActivity extends AppCompatActivity implements View.OnClickListe
                             Map<String,Object> latlang = new HashMap<>();
                             latlang.put("latitud",location.getLatitude());
                             latlang.put("longitud",location.getLongitude());
+                            latlang.put("title",getTitle());
+
                             mDatabase.child("usuarios").push().setValue(latlang);
                         }
                     }

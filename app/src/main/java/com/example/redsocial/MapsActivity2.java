@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -54,7 +56,8 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
             @Override
             public void onFinish() {
-                Toast.makeText(MapsActivity2.this,"Updated Points",Toast.LENGTH_SHORT).show();
+                //.show() show us the toast with info
+                Toast.makeText(MapsActivity2.this,"Updated Points",Toast.LENGTH_SHORT);
                 onMapReady(mMap);
             }
         }.start();
@@ -77,6 +80,14 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        // new code
+        LatLng coruna = new LatLng(43.3618688,-8.4476176);
+        mMap.addMarker(new MarkerOptions().position(coruna).title("Coruña"));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(10).target(coruna).build();
+
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
         mDatabase.child("usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -90,9 +101,11 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                     MapsPojo mp = snapshot.getValue(MapsPojo.class);
                     Double latitud = mp.getLatitud();
                     Double longitud = mp.getLongitud();
+                    //New Code
+                    String title = mp.getTitle();
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(new LatLng(latitud,longitud));
-                    tmpRealTimeMarker.add(mMap.addMarker(markerOptions));
+                    tmpRealTimeMarker.add(mMap.addMarker(markerOptions.title(title)));
 
                 }
 
