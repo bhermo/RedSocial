@@ -82,11 +82,14 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
         // new code
         LatLng coruna = new LatLng(43.3618688,-8.4476176);
-        mMap.addMarker(new MarkerOptions().position(coruna).title("Coruña"));
+        mMap.addMarker(new MarkerOptions().position(coruna).title("Players of all Coruna"));
 
         CameraPosition cameraPosition = new CameraPosition.Builder().zoom(10).target(coruna).build();
 
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+
+        mMap.getUiSettings().setZoomControlsEnabled(true);
 
         mDatabase.child("usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
