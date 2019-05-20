@@ -10,13 +10,13 @@
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground" />
+        android:background="?android:attr/windowBackground" >
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorBlack"
         android:background="?android:attr/windowBackground"
-        android:id="@+id/toolbar"/>
+        android:id="@+id/toolbar">
         
     <ImageView
         android:layout_width="wrap_content"
@@ -27,23 +27,23 @@
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:textColor="#32FA0F"
         android:background="@android:color/transparent"
         android:hint="Search..."
         android:textColorHint="#32FA0F" />
 
+    </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bar"
+        />
 
 
 
