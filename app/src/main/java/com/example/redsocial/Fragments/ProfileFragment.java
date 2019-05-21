@@ -46,6 +46,8 @@ public class ProfileFragment extends Fragment {
         TextView posts, followers, following, fullname, bio, username;
         Button edit_profile;
 
+
+
         private List<String> mySaves;
 
         RecyclerView recyclerView_saves;
@@ -59,7 +61,7 @@ public class ProfileFragment extends Fragment {
         FirebaseUser firebaseUser;
         String profileid;
 
-        ImageButton my_fotos,saved_fotos;
+        ImageButton my_fotos,saved_fotos,challenges_fotos;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,6 +85,7 @@ public class ProfileFragment extends Fragment {
         my_fotos = view.findViewById(R.id.my_fotos);
         saved_fotos = view.findViewById(R.id.saved_fotos);
 
+
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
@@ -99,14 +102,14 @@ public class ProfileFragment extends Fragment {
         myFotoAdapter_saves = new MyFotoAdapter(getContext(),postList_saves);
         recyclerView_saves.setAdapter(myFotoAdapter_saves);
 
-        recyclerView.setVisibility(View.VISIBLE);
-        recyclerView_saves.setVisibility(View.GONE);
+
 
         userInfo();
         getFollowers();
         getNrPosts();
         myFotos();
         mySaves();
+
 
         if (profileid.equals(firebaseUser.getUid())){
             edit_profile.setText("Edit Profile");
@@ -163,6 +166,8 @@ public class ProfileFragment extends Fragment {
                 recyclerView_saves.setVisibility(View.VISIBLE);
             }
         });
+
+
 
         followers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,6 +328,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
 
     private void mySaves(){
         mySaves = new ArrayList<>();

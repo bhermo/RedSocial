@@ -227,14 +227,7 @@
                     android:src="@drawable/ic_save"
                     style="?android:attr/buttonBarButtonStyle"/>
 
-                <ImageButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/challenges"
-                    android:src="@drawable/challenges_face"
-                    style="?android:attr/buttonBarButtonStyle"
-                    />
+
                 
                 
             </LinearLayout>
@@ -249,6 +242,9 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:id="@+id/recycler_view_save" />
+
+
+
             
         </LinearLayout>
 

@@ -10,12 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.redsocial.Adapter.PostAdapter;
 import com.example.redsocial.Adapter.StoryAdapter;
-import com.example.redsocial.MainActivity;
+import com.example.redsocial.GameActivity;
 import com.example.redsocial.MapsActivity;
 import com.example.redsocial.Model.Post;
 import com.example.redsocial.Model.Story;
@@ -47,6 +46,7 @@ public class HomeFragment extends Fragment {
 
     //New Code
     ImageView imageView;
+    ImageView imageView1;
     //
 
 
@@ -67,6 +67,19 @@ public class HomeFragment extends Fragment {
                 startActivity(in);
             }
         });
+        //
+
+        //New Code
+        ImageView imageView1 = (ImageView) view.findViewById(R.id.joingame);
+        imageView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in1 = new Intent(getActivity(), GameActivity.class);
+                in1.putExtra("you","did it right");
+                startActivity(in1);
+            }
+        });
+
         //
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);

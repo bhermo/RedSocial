@@ -273,6 +273,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             more = itemView.findViewById(R.id.more);
 
 
+
         }
     }
 
@@ -444,4 +445,5 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             }
         });
     }
+
 }
