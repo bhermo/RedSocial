@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/skullcode"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+    <com.varunest.sparkbutton.SparkButton
+        android:id="@+id/spark_button"
+        android:layout_width="222dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        app:sparkbutton_activeImage="@drawable/text"
+        app:sparkbutton_iconSize="130dp"
+        app:sparkbutton_inActiveImage="@drawable/fondonegro2"
+        app:sparkbutton_primaryColor="@color/colorPrimary_1"
+        app:sparkbutton_secondaryColor="@color/colorSecond_2" />
+
+    <com.varunest.sparkbutton.SparkButton
+        android:id="@+id/spark_button2"
+        android:layout_width="293dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        app:sparkbutton_activeImage="@drawable/fondonegro2"
+        app:sparkbutton_iconSize="130dp"
+        app:sparkbutton_inActiveImage="@drawable/text"
+        app:sparkbutton_primaryColor="@color/colorPrimary_1"
+        app:sparkbutton_secondaryColor="@color/colorSecond_2" />
+
+
+
+</LinearLayout>

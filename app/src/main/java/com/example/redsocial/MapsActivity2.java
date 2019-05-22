@@ -1,7 +1,10 @@
 package com.example.redsocial;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,26 +48,25 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     }
 
 
-    private void countDownTimer(){
+    private void countDownTimer() {
 
-        new CountDownTimer(10000,1000){
+        new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                Log.e("seconds remaining",""+millisUntilFinished / 1000);
+                Log.e("seconds remaining", "" + millisUntilFinished / 1000);
 
             }
 
             @Override
             public void onFinish() {
                 //.show() show us the toast with info
-                Toast.makeText(MapsActivity2.this,"Updated Points",Toast.LENGTH_SHORT);
+                Toast.makeText(MapsActivity2.this, "Updated Points", Toast.LENGTH_SHORT);
                 onMapReady(mMap);
             }
         }.start();
 
 
     }
-
 
 
     /**
@@ -80,11 +82,23 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        //new code
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
+        //
+
         // new code
         LatLng coruna = new LatLng(43.3618688,-8.4476176);
         mMap.addMarker(new MarkerOptions().position(coruna).title("Players of all Coruna"));
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(10).target(coruna).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(12).target(coruna).build();
 
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
