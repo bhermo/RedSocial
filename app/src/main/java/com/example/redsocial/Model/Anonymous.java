@@ -8,7 +8,7 @@ public class Anonymous {
     private String Image;
 
 
-    private Anonymous(){
+    public Anonymous(){
 
     }
 

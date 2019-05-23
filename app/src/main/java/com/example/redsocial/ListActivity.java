@@ -1,8 +1,11 @@
 package com.example.redsocial;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +21,7 @@ public class ListActivity extends AppCompatActivity {
 
     ListView lv;
     FirebaseListAdapter adapter;
+    private Button btnnext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         lv= (ListView) findViewById(R.id.listView);
+        btnnext = (Button) findViewById(R.id.next);
 
         Query query = FirebaseDatabase.getInstance().getReference().child("Anonymous");
         FirebaseListOptions<Anonymous> options = new FirebaseListOptions.Builder<Anonymous>()
@@ -38,18 +43,36 @@ public class ListActivity extends AppCompatActivity {
                 TextView PIN=v.findViewById(R.id.Pin);
                 TextView description=v.findViewById(R.id.description);
                 TextView level=v.findViewById(R.id.level);
-                ImageView image = v.findViewById(R.id.imageView);
 
                 Anonymous std = (Anonymous) model;
                 stdID.setText("Player: "+std.getAnonymousID().toString());
                 PIN.setText("PIN: "+std.getPin().toString());
                 description.setText("Description: "+std.getDescription().toString());
                 level.setText("Level: "+std.getLevel().toString());
-                Picasso.with(ListActivity.this).load(std.getImage().toString()).into(image);
 
             }
         };
          lv.setAdapter(adapter);
+         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+             @Override
+             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                 Intent updataDelete = new Intent(ListActivity.this,UpdateDeleteActivity.class);
+                 Anonymous a = (Anonymous) parent.getItemAtPosition(position);
+                 updataDelete.putExtra("pin",a.getPin());
+                 updataDelete.putExtra("level",a.getLevel());
+                 updataDelete.putExtra("description",a.getDescription());
+                 updataDelete.putExtra("key",a.getAnonymousID());
+                 startActivity(updataDelete);
+             }
+         });
+
+         btnnext.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent = new Intent(ListActivity.this,AddChallengesActivity.class);
+                 startActivity(intent);
+             }
+         });
     }
     @Override
     protected void onStart(){
