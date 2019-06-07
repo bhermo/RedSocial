@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorBlack"
     android:layout_height="match_parent"
     tools:context=".GameActivity2"
     android:padding="5sp"
@@ -23,6 +24,7 @@
             android:src="@mipmap/ic_launcher_user" />
         <TextView
             android:id="@+id/nombre"
+            android:textColor="#32FA0F"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rodri"
@@ -39,8 +41,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/btnEnviarFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/ic_menu_gallery"
+            android:layout_gravity="center"
+            />
         <EditText
             android:id="@+id/txtMensaje"
+            android:textColor="#32FA0F"
+            android:textColorHint="#32FA0F"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Escribe un mensaje"
@@ -49,6 +60,8 @@
         <Button
             android:id="@+id/btnEnviar"
             android:layout_width="wrap_content"
+            android:textColorHint="#32FA0F"
+            android:background="@drawable/button_background"
             android:layout_height="wrap_content"
             android:hint="Enviar"
             />

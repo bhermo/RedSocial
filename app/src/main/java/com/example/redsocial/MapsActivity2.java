@@ -1,7 +1,11 @@
 package com.example.redsocial;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -26,12 +30,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
     private GoogleMap mMap;
     private DatabaseReference mDatabase;
     private ArrayList<Marker> tmpRealTimeMarker = new ArrayList<>();
     private ArrayList<Marker> realTimeMarker = new ArrayList<>();
+
+    private Location currentLocation = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,23 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
+
+
         countDownTimer();
 
     }
@@ -137,6 +160,27 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
 
             }
         });
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        this.currentLocation = location;
+        //location.getLongitude();
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
 
     }
 }

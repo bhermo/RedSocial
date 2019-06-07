@@ -156,7 +156,7 @@ public class StoryAdapter extends  RecyclerView.Adapter<StoryAdapter.ViewHolder>
                                             dialogInterface.dismiss();
                                     }
                                 });
-                        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "View story",
+                        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Add story",
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {

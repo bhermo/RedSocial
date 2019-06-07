@@ -59,6 +59,8 @@ public class CommentsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Comments");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().getThemedContext();
+        toolbar.setTitleTextColor(0xFF32FA0F);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

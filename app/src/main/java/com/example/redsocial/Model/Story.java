@@ -7,6 +7,9 @@ public class Story {
     private long timeend;
     private String storyid;
     private String userid;
+    private double latitud;
+    private double longitud;
+    private String title;
 
     public Story(String imageurl, long timestart, long timeend, String storyid, String userid) {
         this.imageurl = imageurl;

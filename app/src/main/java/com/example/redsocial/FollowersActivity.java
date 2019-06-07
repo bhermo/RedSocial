@@ -45,6 +45,8 @@ public class FollowersActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().getThemedContext();
+        toolbar.setTitleTextColor(0xFF32FA0F);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

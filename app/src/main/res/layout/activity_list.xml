@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorBlack"
+    android:layout_height="match_parent"
     tools:context=".ListActivity">
-    
-    <ListView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_anonymous"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/listView"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@drawable/button_background"
-                android:id="@+id/next"
-                android:textStyle="bold"
-                android:textColor="#32FA0F"
-                android:text="Add new Challenges"
-                />
-
-
-
-        </LinearLayout>
-
-
-
-
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

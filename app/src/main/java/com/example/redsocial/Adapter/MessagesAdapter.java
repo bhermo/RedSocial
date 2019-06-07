@@ -7,15 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.redsocial.Model.Message;
+import com.example.redsocial.Model.MessageReceive;
 import com.example.redsocial.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 public class MessagesAdapter extends RecyclerView.Adapter<HolderMessagesAdapter> {
 
-    private List<Message> listMessage = new ArrayList<>();
+    private List<MessageReceive> listMessage = new ArrayList<>();
     private Context c;
 
     public MessagesAdapter(Context c){
@@ -23,7 +28,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<HolderMessagesAdapter>
 
     }
 
-    public void addMessage(Message m){
+    public void addMessage(MessageReceive m){
         listMessage.add(m);
         notifyItemInserted(listMessage.size());
     }
@@ -39,7 +44,24 @@ public class MessagesAdapter extends RecyclerView.Adapter<HolderMessagesAdapter>
     public void onBindViewHolder(@NonNull HolderMessagesAdapter holderMessagesAdapter, int i) {
         holderMessagesAdapter.getNombre().setText(listMessage.get(i).getNombre());
         holderMessagesAdapter.getMensaje().setText(listMessage.get(i).getMensaje());
-        holderMessagesAdapter.getHora().setText(listMessage.get(i).getHora());
+        if (listMessage.get(i).getType_mensaje().equals("2")){
+            holderMessagesAdapter.getFotoMensaje().setVisibility(View.VISIBLE);
+            holderMessagesAdapter.getMensaje().setVisibility(View.VISIBLE);
+            Glide.with(c).load(listMessage.get(i).getUrlFoto()).into(holderMessagesAdapter.getFotoMensaje());
+        }else if (listMessage.get(i).getType_mensaje().equals("1")){
+            holderMessagesAdapter.getFotoMensaje().setVisibility(View.GONE);
+            holderMessagesAdapter.getMensaje().setVisibility(View.VISIBLE);
+        }
+        if (listMessage.get(i).getFotoPerfil().isEmpty()){
+            holderMessagesAdapter.getFotoMensajePerfil().setImageResource(R.mipmap.ic_launcher);
+        }else {
+            Glide.with(c).load(listMessage.get(i).getFotoPerfil()).into(holderMessagesAdapter.getFotoMensajePerfil());
+        }
+
+        Long codigoHora = listMessage.get(i).getHora();
+        Date d = new Date(codigoHora);
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+        holderMessagesAdapter.getHora().setText(sdf.format(d));
     }
 
     @Override
