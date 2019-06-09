@@ -33,6 +33,7 @@ public class AddStoryActivity extends AppCompatActivity {
     private StorageTask storageTask;
     StorageReference storageReference;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +74,8 @@ public class AddStoryActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if(task.isSuccessful()){
+
+
                         Uri downloadUri = task.getResult();
                         myUrl = downloadUri.toString();
 
@@ -90,6 +93,7 @@ public class AddStoryActivity extends AppCompatActivity {
                         hashMap.put("timeend",timeend);
                         hashMap.put("storyid",storyid);
                         hashMap.put("userid",myid);
+
 
                         reference.child(storyid).setValue(hashMap);
                         pd.dismiss();

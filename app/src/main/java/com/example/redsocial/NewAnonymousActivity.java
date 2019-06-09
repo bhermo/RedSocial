@@ -49,7 +49,7 @@ public class NewAnonymousActivity extends AppCompatActivity {
 
                     @Override
                     public void DataIsInserted() {
-                        Toast.makeText(NewAnonymousActivity.this,"The Game record has"+
+                        Toast.makeText(NewAnonymousActivity.this,"The Game record has "+
                                 "been inserted succesfully", Toast.LENGTH_LONG).show();
 
                     }

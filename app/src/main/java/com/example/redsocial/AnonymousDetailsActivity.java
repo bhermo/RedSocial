@@ -73,7 +73,7 @@ public class AnonymousDetailsActivity extends AppCompatActivity {
 
                     @Override
                     public void DataIsUpdated() {
-                        Toast.makeText(AnonymousDetailsActivity.this,"Anonymous record has been"+
+                        Toast.makeText(AnonymousDetailsActivity.this,"Anonymous record has been "+
                                 "updated successfully",Toast.LENGTH_LONG).show();
                     }
 
@@ -105,7 +105,7 @@ public class AnonymousDetailsActivity extends AppCompatActivity {
 
                    @Override
                    public void DataIsDeleted() {
-                        Toast.makeText(AnonymousDetailsActivity.this,"Anonymous has been" +
+                        Toast.makeText(AnonymousDetailsActivity.this,"Anonymous has been " +
                                 "deleted successfully!",Toast.LENGTH_LONG).show();
                         finish();return;
                    }
